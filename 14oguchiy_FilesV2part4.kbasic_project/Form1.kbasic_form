@@ -1,0 +1,584 @@
+﻿Begin Form *
+    Caption = "File Input Output"
+    DockTitleVisible = True
+    DrawOnPaint = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 572
+    LoadedHeight = 569
+    LoadedWidth = 500
+    LoadedX = 304
+    LoadedY = 22
+    MouseTracking = True
+    Opacity = 100
+    Resizable = True
+    SQLDelete = True
+    SQLInsert = True
+    SQLUpdate = True
+    Visible = True
+    Width = 500
+    X = 265
+    Y = 6
+
+
+  Begin CommandButton cmdInput
+    Caption = "Read File"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 34
+    LoadedHeight = 34
+    LoadedWidth = 140
+    LoadedX = 348
+    LoadedY = 142
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 140
+    X = 348
+    Y = 142
+  End
+
+  Begin Label lblDisplay
+    Alignment = "AlignLeft;"
+    Caption = ""
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 243
+    LoadedHeight = 243
+    LoadedWidth = 204
+    LoadedX = 41
+    LoadedY = 122
+    ParentControl = ""
+    TabIndex = 0
+    TableViewVisible = True
+    Visible = True
+    Width = 204
+    WordWrap = True
+    X = 41
+    Y = 122
+  End
+
+  Begin CommandButton cmdOutput
+    Caption = "Write File"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 34
+    LoadedHeight = 34
+    LoadedWidth = 140
+    LoadedX = 348
+    LoadedY = 178
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 140
+    X = 348
+    Y = 178
+  End
+
+  Begin CommandButton cmdDataEntry
+    Caption = "Data Entry"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 34
+    LoadedHeight = 34
+    LoadedWidth = 140
+    LoadedX = 348
+    LoadedY = 104
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 140
+    X = 348
+    Y = 104
+  End
+
+  Begin CommandButton cmdQuit
+    Caption = "Quit"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 34
+    LoadedHeight = 34
+    LoadedWidth = 140
+    LoadedX = 348
+    LoadedY = 285
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 140
+    X = 348
+    Y = 285
+  End
+
+  Begin CommandButton CmdSearch
+    Caption = "Search"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 34
+    LoadedHeight = 34
+    LoadedWidth = 140
+    LoadedX = 348
+    LoadedY = 210
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 140
+    X = 348
+    Y = 210
+  End
+
+  Begin RadioButton RadioHigh
+    Caption = "Score:High to Low                                            "
+    DrawOnPaint = True
+    Enabled = True
+    FontSize = 12
+    GlobalX = 0
+    GlobalY = 0
+    Height = 30
+    LoadedHeight = 30
+    LoadedWidth = 120
+    LoadedX = 343
+    LoadedY = 338
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 120
+    X = 343
+    Y = 338
+  End
+
+  Begin RadioButton RadioLow
+    Caption = "Score:Low to High"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 30
+    LoadedHeight = 30
+    LoadedWidth = 120
+    LoadedX = 341
+    LoadedY = 379
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 120
+    X = 341
+    Y = 379
+  End
+
+  Begin CommandButton CmdSort
+    Caption = "Sort"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 34
+    LoadedHeight = 34
+    LoadedWidth = 140
+    LoadedX = 348
+    LoadedY = 249
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 140
+    X = 348
+    Y = 249
+  End
+
+  Begin RadioButton RadioNameHigh
+    Caption = "Name:A to Z"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 30
+    LoadedHeight = 30
+    LoadedWidth = 140
+    LoadedX = 344
+    LoadedY = 423
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 140
+    X = 344
+    Y = 423
+  End
+
+  Begin RadioButton RadioNameLow
+    Caption = "Name:Z to A"
+    DrawOnPaint = True
+    Enabled = True
+    GlobalX = 0
+    GlobalY = 0
+    Height = 30
+    LoadedHeight = 30
+    LoadedWidth = 144
+    LoadedX = 343
+    LoadedY = 463
+    ParentControl = ""
+    TabIndex = 0
+    Visible = True
+    Width = 144
+    X = 343
+    Y = 463
+  End
+
+End Form
+ /*
+Yuya Oguchi
+2/3/13 
+Intermediate Programming B3
+Randell
+Files V2
+Version 1.0
+ */
+ 
+  dim scores (1 to 10) as integer
+  dim names (1 to 10) as string
+  
+  
+  
+/*
+Private Sub CmdDisplay_OnEvent()
+ Display
+End Sub
+*/
+
+
+'display names and scores for each person
+Private Sub Display
+
+dim i as integer
+updateArray
+lblDisplay.Caption = ""
+
+for i=1 to 10
+if names(i)<>"" then
+lblDisplay.Caption = lblDisplay.Caption & names(i) & " : " & str(scores(i)) & KbCrLf
+endif
+next
+
+End sub
+
+'update information typed in
+Private Sub updateArray
+
+dim i as integer
+dim filled as Boolean
+filled = FALSE
+
+if i = 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10 then
+filled = True
+end if 
+
+if filled = FALSE then
+msgbox "Sorry, maximum of 10 scores only"
+endif
+
+End sub
+
+
+/*Allow user to select a file and read the content on to the program */
+Private Sub cmdInput_OnEvent()
+  
+  Dim strBuff As String 
+  Dim i as integer
+  Dim delim as integer 'Used for dividing text
+    
+  Dim filename As String = OpenDialog.GetFile()
+  'MsgBox Dir.HomePath()
+  'MsgBox Application.Path()
+   
+  lblDisplay.Caption=""
+  i=1
+ 
+ /* Open a selected file */
+  Open Filename For Input As #1 
+  
+  
+  Do Until EOF(1) 'Does until End Of File #1
+    
+    /*Input whatever is typed in*/
+    Input #1, strBuff
+    
+    
+    delim = InStr(strBuff, ",")
+    If delim > 0 Then 'If there is comma, then
+      names(i) = Left(strBuff, delim - 1) 'Split the left into names
+      scores(i) = Integer(Right(strBuff, Len(strBuff) - delim)) 'Split right into score
+    endif
+    
+    if names(i)<>"" then
+      lblDisplay.Caption = lblDisplay.Caption  & names(i) & " : " & str(scores(i)) & KbCrLf 'Puts it into a caption
+    endif
+    i=i+1
+    
+  Loop
+  
+ 
+  
+  Close #1
+  
+  
+End Sub
+
+
+
+'write and save the information you put in
+Private Sub cmdOutput_OnEvent()
+  
+  Dim filename As String = OpenDialog.GetFile()
+  dim i as integer
+  dim strBuff
+ 
+  /* Open a selected file */
+  Open filename For Output As #1 
+   
+     For i = 1 to 10 
+       If names(i) <> "" Then
+         strBuff = names(i) & "," & scores(i)
+         Write #1, strBuff
+       endif
+     next 
+   
+   
+   Close #1
+  
+   
+   msgbox("Writing completed.")
+   
+End Sub
+
+
+
+/* Enter datas onto the program. show a box for name and score. display it on program*/
+Private Sub cmdDataEntry_OnEvent()
+  dim i (1 to 10) as integer ' Uses array of i's
+  i = 1 'starting value of 1
+  
+  
+  'If the name is empty, i increases. If i>10 then memory is full and it writes to a file.
+  Do while names(i) <> ""
+    If i< 10 then
+      i = i + 1
+    ElseIf i = 10 Then
+       msgbox("Memory is full. Data will now be saved.")
+       cmdOutput_OnEvent()
+       i = 1
+    End If
+  Loop
+  
+  'If the name is empty, the user can insert a name.
+  Do While names(i) = ""
+    names(i) = Inputbox("What is the person's name?")
+    If names(i) = "" then
+      msgbox("Please enter a name.")
+    End if
+  Loop
+  
+  'If the score is empty (equals 0) then the user can insert a score.
+  Do While scores(i) = 0
+    scores(i) = val(Inputbox("What is the peron's score?"))
+    If scores(i) = 0 then
+      msgbox("Please enter a score.")
+    End If
+  Loop
+  
+  
+  /*Display the ones written and new ones*/
+  lblDisplay.caption = lblDisplay.caption & names(i) & ": " & scores(i) & KbCrLf
+  
+End Sub  
+    
+    
+'quit
+Private Sub cmdQuit_OnEvent()
+  end
+End Sub
+    
+
+'search for person's name
+Private Sub CmdSearch_OnEvent()
+  Dim search as string
+  Dim Check as string
+  dim i as integer
+  
+  search = Inputbox("What is the peron's name?")
+  'compare everyone's name with entered name
+  for i =1 to 10
+    'if found, then display
+   if lcase(search) = lcase(names(i)) then
+   msgbox(names(i) & ": " & scores(i) )
+   Check = names(i)
+   end if   
+  next
+
+
+'if not found, then display that there was no person by that name
+if lcase(search) <> lcase(Check) then
+msgbox("There is nobody by that name")
+end if 
+
+End Sub
+
+
+
+'Sort based on person's score from highest to lowest
+ Sub SelectionSortHigh(array1() as integer, array2() as string)
+  Dim i as integer
+  Dim j as integer
+  Dim Temp1 as integer
+  Dim Temp2 as string
+  
+  for i = lbound(array1) to ubound(array1) - 1
+    
+    for j = i + 1 to ubound(array1)
+      'compare the one selected with next term
+        If array1(j) > array1(i) then 
+          
+          temp1 = Array1(i)
+          Array1(i) = array1(j)
+          array1(j) = Temp1
+          
+          temp2 = Array2(i)
+          Array2(i) = array2(j)
+          array2(j) = Temp2
+          
+       
+        end if
+    Next
+ Next  
+End sub
+
+'Sort based on person's score from lowest to highest
+
+Sub SelectionSortLow(array1() as integer, array2() as string)
+  Dim i as integer
+  Dim j as integer
+  Dim Temp1 as integer
+  Dim Temp2 as string
+  
+  for i = lbound(array1) to ubound(array1) - 1
+    
+    for j = i + 1 to ubound(array1)
+      
+        If array1(j) < array1(i) then 
+          
+          temp1 = Array1(i)
+          Array1(i) = array1(j)
+          array1(j) = Temp1
+          
+          temp2 = Array2(i)
+          Array2(i) = array2(j)
+          array2(j) = Temp2
+          
+        
+        end if
+    Next
+ Next  
+End sub
+
+
+'Sort based on name from high to low
+Sub SelectionNameHigh(array1() as integer, array2() as string)
+  Dim i as integer
+  Dim j as integer
+  Dim Temp1 as integer
+  Dim Temp2 as string
+  
+  for i = lbound(array1) to ubound(array1) - 1
+    
+    for j = i + 1 to ubound(array1)
+      
+        If array2(j) < array2(i) then 
+          
+  
+          temp1 = Array1(i)
+          Array1(i) = array1(j)
+          array1(j) = Temp1
+          
+          temp2 = Array2(i)
+          Array2(i) = array2(j)
+          array2(j) = Temp2
+         
+
+        end if
+    Next
+ Next  
+End sub
+
+'Sort based on name from low to high
+Sub SelectionNameLow(array1() as integer, array2() as string)
+  Dim i as integer
+  Dim j as integer
+  Dim Temp1 as integer
+  Dim Temp2 as string
+  
+  for i = lbound(array1) to ubound(array1) - 1
+    
+    for j = i + 1 to ubound(array1)
+      
+        If array2(j) > array2(i) then 
+          
+       
+          temp1 = Array1(i)
+          Array1(i) = array1(j)
+          array1(j) = Temp1
+          
+          temp2 = Array2(i)
+          Array2(i) = array2(j)
+          array2(j) = Temp2
+         
+          
+        end if
+    Next
+ Next  
+End sub
+
+
+'radio buttons make sure that if only one is selected, then display sorted according to that
+Private Sub CmdSort_OnEvent()
+ 'scores high to low
+ if RadioHigh.Value = True and RadioLow.Value = False and RadioNameHigh.Value = False and RadioNameLow.Value = False then
+ SelectionSortHigh(scores, names)
+  Display
+ endif
+ 
+ 'scores low to high
+ if RadioHigh.Value = False and RadioLow.Value = True and RadioNameHigh.Value = False and RadioNameLow.Value = False then
+ SelectionSortLow(Scores, names)
+  Display
+ endif
+ 
+ 'names high to low
+ if RadioNameHigh.value = true and RadioNameLow.Value = False and RadioLow.Value = False and RadioNameLow.value = False then 
+ SelectionNameHigh(Scores, names)
+  Display
+ endif
+ 
+ 'names low to high
+ if RadioNameLow.value = true and RadioNameHigh.Value = False and RadioLow.Value = False and RadioNameHigh.value = False then 
+ SelectionNameLow(Scores, names)
+ Display
+ endif
+ 
+End Sub
+          
+  
+
+
+
+
+
+
